@@ -33,7 +33,7 @@ A full-stack Employee Leave Management System where employees can apply leaves a
 ## 1. Clone the repository
 
 ## 2. Install dependencies
-     - To install both frontend and backend dependencies
+      To install both frontend and backend dependencies
           npm run install:frontend
           npm run install:backend
 
