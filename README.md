@@ -1,5 +1,4 @@
-# elms
-Employee Leave Management System
+# Employee Leave Management System
 
 A full-stack Employee Leave Management System where employees can apply leaves and view history, while admin manage departments, employees and leave approvals.
 
