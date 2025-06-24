@@ -7,7 +7,6 @@ const addLeaveType = async (req, res) => {
             const { leavetype, description } = await parseJSONBody(req);
 
             const result = await createLeaveType(leavetype, description)
-            console.log(result, 'from createleavettpe')
 
             if (!result) {
                   return sendJSON(res, 400, { message: 'Department creation failed' })

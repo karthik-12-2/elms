@@ -1,5 +1,18 @@
 const db = require('../config/db.js');
 
+const register = (email, password, role) => {
+      return new Promise((resolve, reject) => {
+            db.query(
+                  'INSERT INTO auth (email, password, role) VALuES (?, ?, ?)',
+                  [email, password, role],
+                  (err, results) => {
+                        if (err) return reject(err);
+                        resolve(results);
+                  }
+            );
+      });
+}
+
 const login = (email, password, role) => {
       return new Promise((resolve, reject) => {
             db.query(
@@ -65,4 +78,6 @@ const getUserNameByEmployeeEmail = (email) => {
       })
 }
 
-module.exports = { login, getUserByEmail, updatePassword, createUser, getUserNameByEmployeeEmail };
+
+
+module.exports = { login, getUserByEmail, updatePassword, createUser, getUserNameByEmployeeEmail, register };

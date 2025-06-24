@@ -1,25 +1,21 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { backendUrl } from '../config/config.jsx';
-import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import { apiClient, backendUrl } from '../config/config';
+import axios from 'axios';
 
-const LoginPage = () => {
-      const location = useLocation();
-      const segments = location.pathname.split('/').filter(Boolean);
-      const roleFromPath = segments[1] || 'employee';
+const AdminRegister = () => {
       const navigate = useNavigate();
-      
 
       const formik = useFormik({
             initialValues: {
                   email: '',
                   password: '',
-                  role: roleFromPath, // Set the role based on the path
+                  role: 'admin',
             },
             validationSchema: Yup.object({
                   email: Yup.string('Enter your email')
@@ -31,10 +27,10 @@ const LoginPage = () => {
             }),
             onSubmit: async (values, { resetForm }) => {
                   try {
-                        const response = await axios.post(`${backendUrl}/login/${roleFromPath}`, values)
-                        if (response.data && response.data.message === 'Login successful') {
-                              localStorage.setItem('isLoggedIn', JSON.stringify({ email: response.data.data.email, password: response.data.data.password, role: response.data.data.role }));
-                              navigate(`/elms/${roleFromPath}/homepage`);
+                        const response = await axios.post(`${backendUrl}/admin/register/`, values)
+
+                        if (response.data && response.data.message === 'Register successful') {
+                              navigate(`/elms/admin`);
                         }
                         resetForm()
                   } catch (error) {
@@ -44,13 +40,13 @@ const LoginPage = () => {
       });
       return (
             <form onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column', marginBlock: '4rem', gap: '1rem', alignItems: 'center', width: '100%', paddingBlock: '2rem' }}>
-                  <Typography variant='h4' >Welcome to the elms</Typography>
+                  <Typography variant='h4' >Welcome to the elms admin Register</Typography>
                   <Box style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#b6bfc8', height: 'fit-content', padding: '2rem', borderRadius: '8px' }}>
-                        <Typography> {segments?.[1]?.toUpperCase() || 'EMPLOYEE'} LOGIN</Typography>
+                        <Typography> ADMIN REGISTER</Typography>
                         <TextField
                               id="email"
                               name="email"
-                              label="Enter Registered Email id"
+                              label="Enter Email id"
                               value={formik.values.email}
                               onChange={formik.handleChange}
                               onBlur={formik.handleBlur}
@@ -104,8 +100,7 @@ const LoginPage = () => {
                                     , '&:hover': {
                                           backgroundColor: 'white'
                                     }
-                              }} disableRipple>Submit</Button>
-                              {roleFromPath === 'admin' && <Button sx={{backgroundColor: 'blue', color: 'white', marginInlineStart: 2, width: '100px',  borderRadius: '3px'}} disableRipple onClick={() => navigate('/elms/register')}>Register</Button>}
+                              }} disableRipple>Register</Button>
                         </Box>
                   </Box>
 
@@ -114,5 +109,5 @@ const LoginPage = () => {
       );
 }
 
-export default LoginPage;
+export default AdminRegister;
 

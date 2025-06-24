@@ -6,7 +6,6 @@ const applyLeaveByEmployee = (from, to, leavetype, description, email) => {
                   [leavetype, from, to, description, 'waiting for approval', 'waiting for approval', email, null],
                   (err, result) => {
                         if (err) {
-                              console.log(err)
                               reject(err)
                         } else {
                               resolve(result)

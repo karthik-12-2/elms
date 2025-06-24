@@ -3,7 +3,6 @@ const parseJSONBody = require("../../../utils/parsejsonbody")
 const sendJSON = require("../../../utils/sendjson")
 
 const updateLeaveType = async (req, res, id) => {
-      console.log(id)
       try {
             const leaveTypeData = await parseJSONBody(req)
 
@@ -11,7 +10,6 @@ const updateLeaveType = async (req, res, id) => {
             const values = Object.values(leaveTypeData)
             const setClauseForKeys = keys.map(key => `${key} = ?`).join(', ')
             const result = await updateLeaveTypeById(id, setClauseForKeys, values)
-            console.log(result)
             if (!result) {
                   return sendJSON(res, 400, { message: "Data not found" })
             }

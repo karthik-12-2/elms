@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router';
 const ApprovedLeaves = () => {
   const navigate = useNavigate()
   const [data, setData] = useState([])
-  console.log(data)
   useEffect(() => {
     const fetchApprovedLeaves = async () => {
       const response = await apiClient.get('/admin/approvedleaves')

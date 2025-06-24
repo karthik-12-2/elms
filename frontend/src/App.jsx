@@ -26,6 +26,7 @@ import AddLeaveType from './homepage/admin/pages/leavetype/AddLeaveType.jsx';
 import ManageLeaveType from './homepage/admin/pages/leavetype/ManageLeaveType.jsx';
 import UpdateLeaveType from './homepage/admin/pages/leavetype/UpdateLeaveType.jsx';
 import UpdateEmployee from './homepage/admin/pages/employee/UpdateEmployee.jsx';
+import AdminRegister from './login/adminRegister.jsx';
 
 
 function App() {
@@ -52,8 +53,8 @@ function App() {
       <Routes>
         <Route path="/elms" element={<LoginIndex />}>
           <Route path="admin" element={<Admin />} />
+          <Route path="register" element={<AdminRegister />} />
           <Route path="employee" element={<Employee />} />
-
           <Route
             path={"admin/homepage/"}
             element={

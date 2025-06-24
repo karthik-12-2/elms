@@ -5,7 +5,6 @@ const leaveHistory = async (req, res) => {
       try {
             const { email } = req.user
             const result = await fetchLeaveByEmployee(email)
-            console.log(result)
             if (!result) {
                   return sendJSON(res, 400, { message: "Data not found" })
             }

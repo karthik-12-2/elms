@@ -6,8 +6,7 @@ import SideBar from "./sidebar/sideBar.jsx";
 
 
 const Index = () => {
-      const { isLoading, isAuthenticated } = useAuth();
-      // console.log(isAuthenticated)
+      const { isLoading } = useAuth();
       if (isLoading) {
             return (
                   <LoadingComponent />

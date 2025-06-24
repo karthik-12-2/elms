@@ -16,7 +16,6 @@ const ManageLeaveType = () => {
   useEffect(() => {
     const fetchLeaveType = async () => {
       const response = await apiClient.get('/admin/fetchleavetype')
-      console.log('response')
       setData(response.data)
     }
     fetchLeaveType()

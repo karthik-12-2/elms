@@ -11,7 +11,6 @@ const updateProfile = async (req, res) => {
             const values = Object.values(profiledata)
             const setClauseForKeys = keys.map(key => `${key} = ?`).join(', ')
             const result = await updateEmployeeProfile(email, setClauseForKeys, values)
-            console.log(result)
             if (!result) {
                   return sendJSON(res, 400, { message: "Data not found" })
             }

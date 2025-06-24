@@ -20,6 +20,7 @@ const deleteLeaveType = require("../controllers/admin/leavetype/deleteleavetype.
 const getAllLeaveType = require("../controllers/admin/leavetype/getallleavetype.controller.js");
 const getLeaveType = require("../controllers/admin/leavetype/getleavetype.controller.js");
 const updateLeaveType = require("../controllers/admin/leavetype/updateleavetype.controller.js");
+const adminRegister = require("../controllers/admin/register.controller.js");
 const changePassword = require("../controllers/changepassword.controller.js");
 const auth = require('../middleware/auth.middleware.js');
 
@@ -29,6 +30,8 @@ const admin = (req, res) => {
             return auth(req, res, () => {
                   changePassword(req, res)
             });
+      } else if (req.url.includes('/register')) {
+            return adminRegister(req, res)
       } else if (req.url.includes('/addemployee')) {
             return auth(req, res, () => {
                   addemployee(req, res)

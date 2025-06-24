@@ -10,7 +10,6 @@ const LeaveHistory = () => {
       useEffect(() => {
             const fetchLeaveType = async () => {
                   const response = await apiClient.get('/employee/leavehistory')
-                  console.log('response')
                   setData(response.data)
             }
             fetchLeaveType()

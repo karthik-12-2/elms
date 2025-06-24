@@ -4,7 +4,6 @@ const loginRouter = require('./login.route.js');
 const checkLoginStatus = require('../controllers/checkloginstatus.controller.js')
 
 const router = (req, res) => {
-      // console.log(req.url)
       if (req.url.startsWith('/login')) {
             return loginRouter(req, res);
       } else if (req.url === '/checkLoginStatus' && req.method === 'POST') {

@@ -6,7 +6,6 @@ const sendJSON = require('../utils/sendjson.js');
 const loginController = async (req, res) => {
       try {
             const { email, password, role } = await parseJSONBody(req);
-            console.log(email, password, role, 'from login')
             if (!email || !password || !role) {
                   return sendJSON(res, 400, { message: 'Missing email, password, or role' })
             }
