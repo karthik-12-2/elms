@@ -40,4 +40,4 @@ A full-stack Employee Leave Management System where employees can apply leaves a
 ## 3. Start the Application (Frontend and Backend)
        npm run start
 ### This Command runs both frontend and backend servers at the same time using concurrently
-      "start": "concurrently \"npm run dev --prefix frontend\" \"npm run start --prefix backend\""
+"start": "concurrently \"npm run dev --prefix frontend\" \"npm run start --prefix backend\""
