@@ -10,15 +10,23 @@ import Notification from '../../../notification/Notification';
 const MyProfile = ({ fetchEmployee }) => {
       const { showNotification } = useNotification()
       const [data, setData] = useState(null)
+      const [department, setDepartment] = useState([])
       const fetchMyProfile = useCallback(async () => {
             const response = await apiClient.get('/employee/myprofile')
             setData(response.data.result)
       }, [])
 
       useEffect(() => {
+            const fetchDepartment = async () => {
+                  const response = await apiClient.get('/admin/fetchdepartment')
+                  setDepartment(response.data)
+            }
+            fetchDepartment()
+      }, [])
+
+      useEffect(() => {
             fetchMyProfile()
       }, [fetchMyProfile])
-
 
       const formik = useFormik({
             enableReinitialize: true,
@@ -326,8 +334,7 @@ const MyProfile = ({ fetchEmployee }) => {
                                                       marginBottom: '10px'
                                                 }}
                                           >
-                                                <MenuItem value="">Select Department</MenuItem>
-                                                <MenuItem value="HR">HR</MenuItem>
+                                                {department?.map((row, i) => <MenuItem value={row.departmentname} key={i}>{row.departmentname}</MenuItem>)}
 
                                           </TextField>
                                           <TextField
