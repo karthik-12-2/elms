@@ -4,7 +4,7 @@ A full-stack Employee Leave Management System where employees can apply leaves a
 
 ## Tech Stack
 
-- **Frontend**: ReactJS, Formik
+- **Frontend**: ReactJS, Formik, MaterailUI
 - **Backend**: Node.js,
 - **Database**: MySQL
 
