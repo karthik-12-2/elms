@@ -30,7 +30,7 @@ A full-stack Employee Leave Management System where employees can apply leaves a
 
 
 ## 1. Clone the repository
-
+     git clone https://github.com/karthik-12-2/elms.git
 ## 2. Install dependencies
      To install both frontend and backend dependencies
           npm run install:frontend
