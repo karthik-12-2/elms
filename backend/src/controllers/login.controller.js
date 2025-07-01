@@ -12,17 +12,17 @@ const loginController = async (req, res) => {
 
             const user = await getUserByEmail(email);
             // check if the user exists
-            if (!user || user[0].length === 0) {
+            if (user.length === 0) {
                   return sendJSON(res, 401, { message: 'User doesnot exists' })
             }
 
-            const isPasswordValid = await comparePassword(password, user[0].password);
+            const isPasswordValid = await comparePassword(password, user[0]?.password);
 
             if (!isPasswordValid) {
                   return sendJSON(res, 401, { message: 'Invalid password' })
             }
 
-            const [rows] = await login(email, user[0].password, role);
+            const [rows] = await login(email, user[0]?.password, role);
             return sendJSON(res, 200, {
                   message: 'Login successful',
                   data: rows

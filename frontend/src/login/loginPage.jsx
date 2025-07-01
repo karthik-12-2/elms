@@ -7,8 +7,11 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import Notification from '../notification/Notification.jsx';
+import { useNotification } from '../notification/NotificationContext.jsx';
 
 const LoginPage = () => {
+      const { showNotification } = useNotification()
       const location = useLocation();
       const segments = location.pathname.split('/').filter(Boolean);
       const roleFromPath = segments[1] || 'employee';
@@ -38,7 +41,7 @@ const LoginPage = () => {
                         }
                         resetForm()
                   } catch (error) {
-                        console.log(error)
+                        showNotification(`Error ${error.response.data.message}`, 'error')
                   }
             },
       });
@@ -46,6 +49,7 @@ const LoginPage = () => {
             <form onSubmit={formik.handleSubmit} style={{ display: 'flex', flexDirection: 'column', marginBlock: '4rem', gap: '1rem', alignItems: 'center', width: '100%', paddingBlock: '2rem' }}>
                   <Typography variant='h4' >Welcome to the elms</Typography>
                   <Box style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#b6bfc8', height: 'fit-content', padding: '2rem', borderRadius: '8px' }}>
+                        <Notification />
                         <Typography> {segments?.[1]?.toUpperCase() || 'EMPLOYEE'} LOGIN</Typography>
                         <TextField
                               id="email"
