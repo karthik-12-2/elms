@@ -1,11 +1,11 @@
 const db = require('../config/db.js');
 
-const createEmployee = (empcode, gender, birthdate, firstname, lastname, deparment, country, email, city, address, mobilenumber, status) => {
+const createEmployee = (empcode, gender, birthdate, firstname, lastname, deparment, country, email, city, address, mobilenumber, status, salary) => {
       return new Promise((resolve, reject) => {
             db.query(
-                  `INSERT INTO employee (employeecode, gender, birthdate, firstname, lastname, department, country, email, city, address, mobilenumber, status)
-                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
-                  [empcode, gender, birthdate, firstname, lastname, deparment, country, email, city, address, mobilenumber, status],
+                  `INSERT INTO employee (employeecode, gender, birthdate, firstname, lastname, department, country, email, city, address, mobilenumber, status, salary)
+                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+                  [empcode, gender, birthdate, firstname, lastname, deparment, country, email, city, address, mobilenumber, status, salary],
                   (err, result) => {
                         if (err) {
                               return reject(err)

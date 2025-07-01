@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, MenuItem, Typography } from '@mui/material'
 import { useCallback, useState } from 'react';
 import { useEffect } from 'react';
 import { apiClient } from '../../../config/config';
 import { useNotification } from '../../../notification/NotificationContext';
 import Notification from '../../../notification/Notification';
+import TextFieldComponent from '../../../textfieldcomponent/TextFieldComponent';
 
 const MyProfile = ({ fetchEmployee }) => {
       const { showNotification } = useNotification()
@@ -63,7 +64,7 @@ const MyProfile = ({ fetchEmployee }) => {
                   for (let key in values) {
                         const original = data[key];
                         const updated = values[key]
-                        
+
                         if (key === 'birthdate') {
                               const originalDate = original?.split('T')?.[0] || ''
                               if (originalDate !== updated) {
@@ -80,7 +81,7 @@ const MyProfile = ({ fetchEmployee }) => {
                         return
                   }
                   try {
-                       const response = await apiClient.post('/employee/updateprofile', changedValues)
+                        const response = await apiClient.post('/employee/updateprofile', changedValues)
                         showNotification(`Success ${response.data.message}`)
                         await fetchMyProfile()
                         await fetchEmployee()
@@ -93,11 +94,11 @@ const MyProfile = ({ fetchEmployee }) => {
             <>
                   <Typography component='p'>UPDATE PROFILE DETAILS</Typography>
                   <Box sx={{ marginTop: 2, backgroundColor: 'white', padding: 3 }}>
-                        <Notification/>
+                        <Notification />
                         <form style={{ display: "grid", gridTemplateColumns: '1fr 1fr', columnGap: '16px' }} onSubmit={formik.handleSubmit}>
                               {/* left */}
                               <Box sx={{ display: 'grid', gridTemplateColumns: '1fr' }}>
-                                    <TextField
+                                    <TextFieldComponent
                                           id="employeecode"
                                           name="employeecode"
                                           label="Employee Code(Must be unique)"
@@ -108,24 +109,10 @@ const MyProfile = ({ fetchEmployee }) => {
                                           onBlur={formik.handleBlur}
                                           error={formik.touched.employeecode && Boolean(formik.errors.employeecode)}
                                           helperText={formik.touched.employeecode && formik.errors.employeecode}
-                                          sx={{
-                                                '& .MuiFilledInput-root': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root: hover': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                marginBottom: '10px'
-                                          }}
+
                                     />
                                     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="firstname"
                                                 name="firstname"
                                                 label="First name"
@@ -136,23 +123,9 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.firstname && Boolean(formik.errors.firstname)}
                                                 helperText={formik.touched.firstname && formik.errors.firstname}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           />
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="lastname"
                                                 name="lastname"
                                                 label="Last name"
@@ -163,24 +136,10 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.lastname && Boolean(formik.errors.lastname)}
                                                 helperText={formik.touched.lastname && formik.errors.lastname}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           />
                                     </Box>
-                                    <TextField
+                                    <TextFieldComponent
                                           id="email"
                                           name="email"
                                           label="Email"
@@ -191,23 +150,9 @@ const MyProfile = ({ fetchEmployee }) => {
                                           onBlur={formik.handleBlur}
                                           error={formik.touched.email && Boolean(formik.errors.email)}
                                           helperText={formik.touched.email && formik.errors.email}
-                                          sx={{
-                                                '& .MuiFilledInput-root': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root: hover': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                marginBottom: '10px'
-                                          }}
+
                                     />
-                                    <TextField
+                                    <TextFieldComponent
                                           id="mobilenumber"
                                           name="mobilenumber"
                                           label="Mobile number"
@@ -218,28 +163,14 @@ const MyProfile = ({ fetchEmployee }) => {
                                           onBlur={formik.handleBlur}
                                           error={formik.touched.mobilenumber && Boolean(formik.errors.mobilenumber)}
                                           helperText={formik.touched.mobilenumber && formik.errors.mobilenumber}
-                                          sx={{
-                                                '& .MuiFilledInput-root': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root: hover': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                marginBottom: '10px'
-                                          }}
+
                                     />
                               </Box>
 
                               {/* right */}
                               <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', columnGap: 2 }}>
                                     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="gender"
                                                 name="gender"
                                                 label="Gender"
@@ -250,29 +181,15 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.gender && Boolean(formik.errors.gender)}
                                                 helperText={formik.touched.gender && formik.errors.gender}
-                                                select
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+                                                select={true}
+
                                           >
                                                 <MenuItem value="">Select Gender</MenuItem>
                                                 <MenuItem value="Male">Male</MenuItem>
                                                 <MenuItem value="Female">Female</MenuItem>
                                                 <MenuItem value="Other">Other</MenuItem>
-                                          </TextField>
-                                          <TextField
+                                          </TextFieldComponent>
+                                          <TextFieldComponent
                                                 id="birthdate"
                                                 name="birthdate"
                                                 label="Birthdate"
@@ -286,58 +203,29 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 sx={{
                                                       paddingTop: '10px',
                                                       marginTop: '-10px'
-                                                      ,
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
 
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-
-                                                      marginBottom: '10px'
                                                 }}
                                           />
                                     </Box>
                                     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="department"
                                                 name="department"
                                                 label="Department"
                                                 type="text"
                                                 variant="filled"
-                                                select
+                                                select={true}
                                                 value={formik.values.department}
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.department && Boolean(formik.errors.department)}
                                                 helperText={formik.touched.department && formik.errors.department}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           >
                                                 {department?.map((row, i) => <MenuItem value={row.departmentname} key={i}>{row.departmentname}</MenuItem>)}
 
-                                          </TextField>
-                                          <TextField
+                                          </TextFieldComponent>
+                                          <TextFieldComponent
                                                 id="country"
                                                 name="country"
                                                 label="Country"
@@ -348,25 +236,11 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.country && Boolean(formik.errors.country)}
                                                 helperText={formik.touched.country && formik.errors.country}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           />
                                     </Box>
                                     <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="city"
                                                 name="city"
                                                 label="City/Town"
@@ -377,23 +251,9 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.city && Boolean(formik.errors.city)}
                                                 helperText={formik.touched.city && formik.errors.city}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           />
-                                          <TextField
+                                          <TextFieldComponent
                                                 id="address"
                                                 name="address"
                                                 label="Address"
@@ -404,21 +264,7 @@ const MyProfile = ({ fetchEmployee }) => {
                                                 onBlur={formik.handleBlur}
                                                 error={formik.touched.address && Boolean(formik.errors.address)}
                                                 helperText={formik.touched.address && formik.errors.address}
-                                                sx={{
-                                                      '& .MuiFilledInput-root': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root: hover': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiInputLabel-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      '& .MuiFilledInput-root.Mui-focused': {
-                                                            backgroundColor: 'white',
-                                                      },
-                                                      marginBottom: '10px'
-                                                }}
+
                                           />
                                     </Box>
 

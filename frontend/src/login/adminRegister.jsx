@@ -1,12 +1,12 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-import { apiClient, backendUrl } from '../config/config';
+import { backendUrl } from '../config/config';
 import axios from 'axios';
+import TextFieldComponent from '../textfieldcomponent/TextFieldComponent';
 
 const AdminRegister = () => {
       const navigate = useNavigate();
@@ -43,7 +43,7 @@ const AdminRegister = () => {
                   <Typography variant='h4' >Welcome to the elms admin Register</Typography>
                   <Box style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#b6bfc8', height: 'fit-content', padding: '2rem', borderRadius: '8px' }}>
                         <Typography> ADMIN REGISTER</Typography>
-                        <TextField
+                        <TextFieldComponent
                               id="email"
                               name="email"
                               label="Enter Email id"
@@ -53,22 +53,9 @@ const AdminRegister = () => {
                               error={formik.touched.email && Boolean(formik.errors.email)}
                               helperText={formik.touched.email && formik.errors.email}
                               variant='filled'
-                              sx={{
-                                    '& .MuiFilledInput-root': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root: hover': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                              }}
+                              
                         />
-                        <TextField
+                        <TextFieldComponent
                               id="password"
                               name="password"
                               label="Enter Password"
@@ -79,20 +66,7 @@ const AdminRegister = () => {
                               error={formik.touched.password && Boolean(formik.errors.password)}
                               helperText={formik.touched.password && formik.errors.password}
                               variant='filled'
-                              sx={{
-                                    '& .MuiFilledInput-root': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root: hover': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                              }}
+                              
                         />
                         <Box sx={{textAlign: 'center'}}>
                               <Button type="submit" sx={{

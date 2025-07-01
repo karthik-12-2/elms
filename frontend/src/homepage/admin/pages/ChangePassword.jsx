@@ -1,9 +1,10 @@
-import { Box, TextField, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import {apiClient} from "../../../config/config";
+import { apiClient } from "../../../config/config";
 import { useNotification } from "../../../notification/NotificationContext";
 import Notification from "../../../notification/Notification";
+import TextFieldComponent from "../../../textfieldcomponent/TextFieldComponent";
 
 const ChangePassword = () => {
       const { showNotification } = useNotification()
@@ -24,9 +25,9 @@ const ChangePassword = () => {
                         .oneOf([Yup.ref('newpassword'), null], 'Password must match')
                         .required('Confirm Password is required')
             }),
-            onSubmit: async (values, {resetForm}) => {
+            onSubmit: async (values, { resetForm }) => {
                   try {
-                        const response =await apiClient.post(`/admin/changepassword`, values)
+                        const response = await apiClient.post(`/admin/changepassword`, values)
                         showNotification(`Success ${response.data.message}`)
                         resetForm();
                   } catch (error) {
@@ -39,9 +40,9 @@ const ChangePassword = () => {
             <>
                   <Typography component='p'>CHANGE PASSWORD</Typography>
                   <Box sx={{ marginTop: 2, backgroundColor: 'white', padding: 3 }}>
-                        <Notification/>
+                        <Notification />
                         <form style={{ display: "flex", flexDirection: 'column' }} onSubmit={formik.handleSubmit}>
-                              <TextField
+                              <TextFieldComponent
                                     id="oldpassword"
                                     name="oldpassword"
                                     label="Enter Old Password"
@@ -52,23 +53,8 @@ const ChangePassword = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.oldpassword && Boolean(formik.errors.oldpassword)}
                                     helperText={formik.touched.oldpassword && formik.errors.oldpassword}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
-                              <TextField
+                              <TextFieldComponent
                                     id="newpassword"
                                     name="newpassword"
                                     label="Enter New Password"
@@ -79,23 +65,8 @@ const ChangePassword = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.newpassword && Boolean(formik.errors.newpassword)}
                                     helperText={formik.touched.newpassword && formik.errors.newpassword}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
-                              <TextField
+                              <TextFieldComponent
                                     id="confirmpassword"
                                     name="confirmpassword"
                                     label="Enter Confirm Password"
@@ -106,21 +77,6 @@ const ChangePassword = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.confirmpassword && Boolean(formik.errors.confirmpassword)}
                                     helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
                               <button type="submit" style={{ alignSelf: 'center', paddingBlock: '5px', paddingInline: '20px', marginTop: '20px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }}>Change</button>
                         </form>

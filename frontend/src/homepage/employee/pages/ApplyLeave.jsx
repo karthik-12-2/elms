@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, TextField, Typography, Alert } from "@mui/material"
+import { Box, Button, MenuItem, Typography } from "@mui/material"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { apiClient } from "../../../config/config";
@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNotification } from "../../../notification/NotificationContext";
 import Notification from "../../../notification/Notification";
+import TextFieldComponent from "../../../textfieldcomponent/TextFieldComponent";
 
 const ApplyLeave = () => {
       const { showNotification } = useNotification()
@@ -51,7 +52,7 @@ const ApplyLeave = () => {
                         <Notification />
                         <form style={{ display: "flex", flexDirection: 'column' }} onSubmit={formik.handleSubmit}>
                               <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-                                    <TextField
+                                    <TextFieldComponent
                                           id="from"
                                           name="from"
                                           label="From"
@@ -65,25 +66,9 @@ const ApplyLeave = () => {
                                           sx={{
                                                 paddingTop: '10px',
                                                 marginTop: '-10px'
-                                                ,
-                                                '& .MuiFilledInput-root': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root: hover': {
-                                                      backgroundColor: 'white',
-                                                },
-
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-
-                                                marginBottom: '10px'
                                           }}
                                     />
-                                    <TextField
+                                    <TextFieldComponent
                                           id="to"
                                           name="to"
                                           label="To"
@@ -97,58 +82,27 @@ const ApplyLeave = () => {
                                           sx={{
                                                 paddingTop: '10px',
                                                 marginTop: '-10px'
-                                                ,
-                                                '& .MuiFilledInput-root': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root: hover': {
-                                                      backgroundColor: 'white',
-                                                },
-
-                                                '& .MuiInputLabel-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-                                                '& .MuiFilledInput-root.Mui-focused': {
-                                                      backgroundColor: 'white',
-                                                },
-
-                                                marginBottom: '10px'
                                           }}
                                     />
                               </Box>
-                              <TextField
+                              <TextFieldComponent
                                     id="leavetype"
                                     name="leavetype"
                                     label="Select Leave Type"
                                     variant="filled"
-                                    select
+                                    select={true}
                                     value={formik.values.leavetype || ''}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.leavetype && Boolean(formik.errors.leavetype)}
                                     helperText={formik.touched.leavetype && formik.errors.leavetype}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               >
                                     {leaveType.map((row) => (
                                           <MenuItem value={row.leavetype} key={row.leavetype}>{row.leavetype}</MenuItem>
                                     ))}
 
-                              </TextField>
-                              <TextField
+                              </TextFieldComponent>
+                              <TextFieldComponent
                                     id="description"
                                     name="description"
                                     label="Enter Description"
@@ -159,21 +113,6 @@ const ApplyLeave = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
 
                               <Button type="submit" style={{ alignSelf: 'center', paddingBlock: '5px', paddingInline: '20px', marginTop: '20px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }} disableRipple>APPLY</Button>

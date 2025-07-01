@@ -21,7 +21,7 @@ const ManageEmployee = () => {
     fetchEmployees()
   }, [])
 
-  const filteredData = data.filter(items => Object.values(items).some(valve => valve.toString().toLowerCase().includes(search.toLowerCase())))
+  const filteredData = data.filter(items => Object.values(items).some(valve => valve.toString().toLowerCase().includes(search.toLowerCase())));
   const totalRows = filteredData.length;
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
@@ -90,6 +90,7 @@ const ManageEmployee = () => {
                 <TableCell><TableSortLabel active={orderBy === 'department'} direction={orderBy === 'department' ? order : 'asc'} onClick={() => handleSort('department')}>Department</TableSortLabel></TableCell>
                 <TableCell><TableSortLabel active={orderBy === 'status'} direction={orderBy === 'status' ? order : 'asc'} onClick={() => handleSort('status')}>Status</TableSortLabel></TableCell>
                 <TableCell><TableSortLabel active={orderBy === 'regdate'} direction={orderBy === 'regdate' ? order : 'asc'} onClick={() => handleSort('regdate')}>Reg Date</TableSortLabel></TableCell>
+                <TableCell><TableSortLabel active={orderBy === 'salary'} direction={orderBy === 'salary' ? order : 'asc'} onClick={() => handleSort('salary')}>Salary</TableSortLabel></TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
 
@@ -101,6 +102,7 @@ const ManageEmployee = () => {
                   <TableCell>{row.department}</TableCell>
                   <TableCell sx={{ color: 'green' }}>{row.status}</TableCell>
                   <TableCell>{row.createdat.split(' ')[0].split('-').reverse().join('/')}{' '}{row.createdat.split(' ')[1]}</TableCell>
+                  <TableCell>{row.salary}</TableCell>
                   <TableCell sx={{ display: 'flex', justifyContent: 'space-evenly' }}><Button sx={{ backgroundColor: 'lightblue', color: 'black' }} onClick={() => navigate(`employee/${row.id}`)}>Edit</Button><Button sx={{ backgroundColor: 'red', color: 'black' }} onClick={() => handleDelete(row.id)}>Delete</Button></TableCell>
                 </TableRow>
               ))}

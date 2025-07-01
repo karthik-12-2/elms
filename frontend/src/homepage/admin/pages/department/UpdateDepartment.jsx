@@ -1,14 +1,15 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import { apiClient} from "../../../../config/config";
+import { apiClient } from "../../../../config/config";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Notification from "../../../../notification/Notification";
 import { useNotification } from "../../../../notification/NotificationContext";
+import TextFieldComponent from "../../../../textfieldcomponent/TextFieldComponent";
 
 const UpdateDepartment = () => {
-      const {showNotification} = useNotification()
+      const { showNotification } = useNotification()
       const params = useParams()
       const [data, setData] = useState([])
       const fetchDepartmentData = useCallback(async () => {
@@ -63,9 +64,9 @@ const UpdateDepartment = () => {
             <>
                   <Typography component='p'>UPDATE DEPARTMENT</Typography>
                   <Box sx={{ marginTop: 2, backgroundColor: 'white', padding: 3 }}>
-                        <Notification/>
+                        <Notification />
                         <form style={{ display: "flex", flexDirection: 'column' }} onSubmit={formik.handleSubmit}>
-                              <TextField
+                              <TextFieldComponent
                                     id="departmentcode"
                                     name="departmentcode"
                                     label="Enter Department Code"
@@ -75,23 +76,8 @@ const UpdateDepartment = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.departmentcode && Boolean(formik.errors.departmentcode)}
                                     helperText={formik.touched.departmentcode && formik.errors.departmentcode}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
-                              <TextField
+                              <TextFieldComponent
                                     id="departmentname"
                                     name="departmentname"
                                     label="Enter Department Name"
@@ -102,23 +88,8 @@ const UpdateDepartment = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.departmentname && Boolean(formik.errors.departmentname)}
                                     helperText={formik.touched.departmentname && formik.errors.departmentname}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
-                              <TextField
+                              <TextFieldComponent
                                     id="departmentshortname"
                                     name="departmentshortname"
                                     label="Enter Department Short Name"
@@ -129,21 +100,6 @@ const UpdateDepartment = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.departmentshortname && Boolean(formik.errors.departmentshortname)}
                                     helperText={formik.touched.departmentshortname && formik.errors.departmentshortname}
-                                    sx={{
-                                          '& .MuiFilledInput-root': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root: hover': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiInputLabel-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          '& .MuiFilledInput-root.Mui-focused': {
-                                                backgroundColor: 'white',
-                                          },
-                                          marginBottom: '10px'
-                                    }}
                               />
                               <Button type="submit" style={{ alignSelf: 'center', paddingBlock: '5px', paddingInline: '20px', marginTop: '20px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }} disableRipple>UPDATE</Button>
                         </form>

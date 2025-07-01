@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import Notification from "../../../../notification/Notification";
@@ -6,6 +6,7 @@ import { useNotification } from "../../../../notification/NotificationContext";
 import { useParams } from "react-router";
 import { useCallback, useEffect, useState } from "react";
 import { apiClient } from "../../../../config/config";
+import TextFieldComponent from "../../../../textfieldcomponent/TextFieldComponent";
 
 const UpdateLeaveType = () => {
   const { showNotification } = useNotification()
@@ -23,7 +24,7 @@ const UpdateLeaveType = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      leavetype: data?.leavetype ||  '',
+      leavetype: data?.leavetype || '',
       description: data?.description || ''
     },
     validationSchema: Yup.object({
@@ -59,9 +60,9 @@ const UpdateLeaveType = () => {
     <>
       <Typography component='p'>UPDATE LEAVE TYPE</Typography>
       <Box sx={{ marginTop: 2, backgroundColor: 'white', padding: 3 }}>
-        <Notification/>
+        <Notification />
         <form style={{ display: "flex", flexDirection: 'column' }} onSubmit={formik.handleSubmit}>
-          <TextField
+          <TextFieldComponent
             id="leavetype"
             name="leavetype"
             label="Enter Leave Type"
@@ -72,23 +73,8 @@ const UpdateLeaveType = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.leavetype && Boolean(formik.errors.leavetype)}
             helperText={formik.touched.leavetype && formik.errors.leavetype}
-            sx={{
-              '& .MuiFilledInput-root': {
-                backgroundColor: 'white',
-              },
-              '& .MuiFilledInput-root: hover': {
-                backgroundColor: 'white',
-              },
-              '& .MuiInputLabel-root.Mui-focused': {
-                backgroundColor: 'white',
-              },
-              '& .MuiFilledInput-root.Mui-focused': {
-                backgroundColor: 'white',
-              },
-              marginBottom: '10px'
-            }}
           />
-          <TextField
+          <TextFieldComponent
             id="description"
             name="description"
             label="Enter Description"
@@ -99,21 +85,6 @@ const UpdateLeaveType = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.description && Boolean(formik.errors.description)}
             helperText={formik.touched.description && formik.errors.description}
-            sx={{
-              '& .MuiFilledInput-root': {
-                backgroundColor: 'white',
-              },
-              '& .MuiFilledInput-root: hover': {
-                backgroundColor: 'white',
-              },
-              '& .MuiInputLabel-root.Mui-focused': {
-                backgroundColor: 'white',
-              },
-              '& .MuiFilledInput-root.Mui-focused': {
-                backgroundColor: 'white',
-              },
-              marginBottom: '10px'
-            }}
           />
 
           <Button type="submit" style={{ alignSelf: 'center', paddingBlock: '5px', paddingInline: '20px', marginTop: '20px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none' }} disableRipple>UPDATE</Button>

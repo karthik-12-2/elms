@@ -3,12 +3,12 @@ import * as Yup from 'yup';
 import { backendUrl } from '../config/config.jsx';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Notification from '../notification/Notification.jsx';
 import { useNotification } from '../notification/NotificationContext.jsx';
+import TextFieldComponent from '../textfieldcomponent/TextFieldComponent.jsx';
 
 const LoginPage = () => {
       const { showNotification } = useNotification()
@@ -16,7 +16,7 @@ const LoginPage = () => {
       const segments = location.pathname.split('/').filter(Boolean);
       const roleFromPath = segments[1] || 'employee';
       const navigate = useNavigate();
-      
+
 
       const formik = useFormik({
             initialValues: {
@@ -51,7 +51,7 @@ const LoginPage = () => {
                   <Box style={{ width: '350px', display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#b6bfc8', height: 'fit-content', padding: '2rem', borderRadius: '8px' }}>
                         <Notification />
                         <Typography> {segments?.[1]?.toUpperCase() || 'EMPLOYEE'} LOGIN</Typography>
-                        <TextField
+                        <TextFieldComponent
                               id="email"
                               name="email"
                               label="Enter Registered Email id"
@@ -61,22 +61,9 @@ const LoginPage = () => {
                               error={formik.touched.email && Boolean(formik.errors.email)}
                               helperText={formik.touched.email && formik.errors.email}
                               variant='filled'
-                              sx={{
-                                    '& .MuiFilledInput-root': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root: hover': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                              }}
+
                         />
-                        <TextField
+                        <TextFieldComponent
                               id="password"
                               name="password"
                               label="Enter Password"
@@ -87,29 +74,16 @@ const LoginPage = () => {
                               error={formik.touched.password && Boolean(formik.errors.password)}
                               helperText={formik.touched.password && formik.errors.password}
                               variant='filled'
-                              sx={{
-                                    '& .MuiFilledInput-root': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root: hover': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiInputLabel-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                                    '& .MuiFilledInput-root.Mui-focused': {
-                                          backgroundColor: 'white',
-                                    },
-                              }}
+
                         />
-                        <Box sx={{textAlign: 'center'}}>
+                        <Box sx={{ textAlign: 'center' }}>
                               <Button type="submit" sx={{
                                     width: '100px', alignSelf: 'center', border: 'none', borderRadius: '3px', backgroundColor: 'white', color: 'black'
                                     , '&:hover': {
                                           backgroundColor: 'white'
                                     }
                               }} disableRipple>Submit</Button>
-                              {roleFromPath === 'admin' && <Button sx={{backgroundColor: 'blue', color: 'white', marginInlineStart: 2, width: '100px',  borderRadius: '3px'}} disableRipple onClick={() => navigate('/elms/register')}>Register</Button>}
+                              {roleFromPath === 'admin' && <Button sx={{ backgroundColor: 'blue', color: 'white', marginInlineStart: 2, width: '100px', borderRadius: '3px' }} disableRipple onClick={() => navigate('/elms/register')}>Register</Button>}
                         </Box>
                   </Box>
 

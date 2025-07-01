@@ -1,21 +1,22 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, MenuItem, Typography } from '@mui/material'
 import { apiClient } from "../../../../config/config";
 import { useNotification } from '../../../../notification/NotificationContext';
 import Notification from '../../../../notification/Notification';
 import { useEffect, useState } from 'react';
+import TextFieldComponent from '../../../../textfieldcomponent/TextFieldComponent';
 
 const AddEmployee = () => {
   const { showNotification } = useNotification()
   const [department, setDepartment] = useState([])
   useEffect(() => {
-            const fetchDepartment = async () => {
-                  const response = await apiClient.get('/admin/fetchdepartment')
-                  setDepartment(response.data)
-            }
-            fetchDepartment()
-      }, [])
+    const fetchDepartment = async () => {
+      const response = await apiClient.get('/admin/fetchdepartment')
+      setDepartment(response.data)
+    }
+    fetchDepartment()
+  }, [])
   const formik = useFormik({
     initialValues: {
       employeecode: '',
@@ -31,6 +32,7 @@ const AddEmployee = () => {
       password: '',
       confirmpassword: '',
       mobilenumber: '',
+      salary: ''
     },
 
     validationSchema: Yup.object({
@@ -46,7 +48,8 @@ const AddEmployee = () => {
       address: Yup.string().required('Address is required'),
       password: Yup.string().min(7, 'Password should be of minimum 7 characters length ').required('Password is required'),
       mobilenumber: Yup.string().min(10).required('Mobile number is required'),
-      confirmpassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Confirm Password is required')
+      confirmpassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Confirm Password is required'),
+      salary: Yup.number().required('Salary is required')
     }),
 
     onSubmit: async (values, { resetForm }) => {
@@ -65,9 +68,10 @@ const AddEmployee = () => {
       <Box sx={{ marginTop: 2, backgroundColor: 'white', padding: 3 }}>
         <Notification />
         <form style={{ display: "grid", gridTemplateColumns: '1fr 1fr', columnGap: '16px' }} onSubmit={formik.handleSubmit}>
+
           {/* left */}
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr' }}>
-            <TextField
+            <TextFieldComponent
               id="employeecode"
               name="employeecode"
               label="Employee Code(Must be unique)"
@@ -78,24 +82,9 @@ const AddEmployee = () => {
               onBlur={formik.handleBlur}
               error={formik.touched.employeecode && Boolean(formik.errors.employeecode)}
               helperText={formik.touched.employeecode && formik.errors.employeecode}
-              sx={{
-                '& .MuiFilledInput-root': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root: hover': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                marginBottom: '10px'
-              }}
             />
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-              <TextField
+              <TextFieldComponent
                 id="firstname"
                 name="firstname"
                 label="First name"
@@ -106,23 +95,8 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.firstname && Boolean(formik.errors.firstname)}
                 helperText={formik.touched.firstname && formik.errors.firstname}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
               />
-              <TextField
+              <TextFieldComponent
                 id="lastname"
                 name="lastname"
                 label="Last name"
@@ -133,24 +107,9 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.lastname && Boolean(formik.errors.lastname)}
                 helperText={formik.touched.lastname && formik.errors.lastname}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
               />
             </Box>
-            <TextField
+            <TextFieldComponent
               id="email"
               name="email"
               label="Email"
@@ -161,23 +120,8 @@ const AddEmployee = () => {
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
-              sx={{
-                '& .MuiFilledInput-root': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root: hover': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                marginBottom: '10px'
-              }}
             />
-            <TextField
+            <TextFieldComponent
               id="password"
               name="password"
               label="Password"
@@ -188,23 +132,8 @@ const AddEmployee = () => {
               onBlur={formik.handleBlur}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
-              sx={{
-                '& .MuiFilledInput-root': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root: hover': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                marginBottom: '10px'
-              }}
             />
-            <TextField
+            <TextFieldComponent
               id="confirmpassword"
               name="confirmpassword"
               label="Confirm password"
@@ -215,28 +144,13 @@ const AddEmployee = () => {
               onBlur={formik.handleBlur}
               error={formik.touched.confirmpassword && Boolean(formik.errors.confirmpassword)}
               helperText={formik.touched.confirmpassword && formik.errors.confirmpassword}
-              sx={{
-                '& .MuiFilledInput-root': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root: hover': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                marginBottom: '10px'
-              }}
             />
           </Box>
 
           {/* right */}
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', columnGap: 2 }}>
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-              <TextField
+              <TextFieldComponent
                 id="gender"
                 name="gender"
                 label="Gender"
@@ -247,29 +161,14 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.gender && Boolean(formik.errors.gender)}
                 helperText={formik.touched.gender && formik.errors.gender}
-                select
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
+                select={true}
               >
                 <MenuItem value="">Select Gender</MenuItem>
                 <MenuItem value="Male">Male</MenuItem>
                 <MenuItem value="Female">Female</MenuItem>
                 <MenuItem value="Other">Other</MenuItem>
-              </TextField>
-              <TextField
+              </TextFieldComponent>
+              <TextFieldComponent
                 id="birthdate"
                 name="birthdate"
                 label="Birthdate"
@@ -283,60 +182,29 @@ const AddEmployee = () => {
                 sx={{
                   paddingTop: '10px',
                   marginTop: '-10px'
-                  ,
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-
-                  marginBottom: '10px'
                 }}
               />
             </Box>
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-              <TextField
+              <TextFieldComponent
                 id="department"
                 name="department"
                 label="Department"
                 type="text"
                 variant="filled"
-                select
                 value={formik.values.department || ''}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={formik.touched.department && Boolean(formik.errors.department)}
                 helperText={formik.touched.department && formik.errors.department}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
+                select={true}
               >
                 {department.map((row) => (
                   <MenuItem value={row.departmentname} key={row.departmentname}>{row.departmentname}</MenuItem>
                 ))}
 
-              </TextField>
-              <TextField
+              </TextFieldComponent>
+              <TextFieldComponent
                 id="country"
                 name="country"
                 label="Country"
@@ -347,25 +215,10 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.country && Boolean(formik.errors.country)}
                 helperText={formik.touched.country && formik.errors.country}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
               />
             </Box>
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 2 }}>
-              <TextField
+              <TextFieldComponent
                 id="city"
                 name="city"
                 label="City/Town"
@@ -376,23 +229,8 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.city && Boolean(formik.errors.city)}
                 helperText={formik.touched.city && formik.errors.city}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
               />
-              <TextField
+              <TextFieldComponent
                 id="address"
                 name="address"
                 label="Address"
@@ -403,24 +241,9 @@ const AddEmployee = () => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.address && Boolean(formik.errors.address)}
                 helperText={formik.touched.address && formik.errors.address}
-                sx={{
-                  '& .MuiFilledInput-root': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root: hover': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  '& .MuiFilledInput-root.Mui-focused': {
-                    backgroundColor: 'white',
-                  },
-                  marginBottom: '10px'
-                }}
               />
             </Box>
-            <TextField
+            <TextFieldComponent
               id="mobilenumber"
               name="mobilenumber"
               label="Mobile number"
@@ -431,24 +254,25 @@ const AddEmployee = () => {
               onBlur={formik.handleBlur}
               error={formik.touched.mobilenumber && Boolean(formik.errors.mobilenumber)}
               helperText={formik.touched.mobilenumber && formik.errors.mobilenumber}
-              sx={{
-                '& .MuiFilledInput-root': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root: hover': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiInputLabel-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                '& .MuiFilledInput-root.Mui-focused': {
-                  backgroundColor: 'white',
-                },
-                marginBottom: '10px'
-              }}
             />
-            <Button type="submit" style={{ alignSelf: 'start', paddingBlock: '10px', paddingInline: '20px', marginTop: '10px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none', width: '100px' }} disableRipple>ADD</Button>
+            <TextFieldComponent
+              id="salary"
+              name='salary'
+              type='number'
+              label="Salary"
+              variant="filled"
+              value={formik.values.salary}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.salary && Boolean(formik.errors.salary)}
+              helperText={formik.touched.salary && formik.errors.salary}
+            />
           </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', gridColumn: '1 / -1' }}>
+            <Button type="submit" style={{ paddingBlock: '10px', paddingInline: '20px', marginTop: '10px', marginBottom: '10px', backgroundColor: 'blue', color: 'white', border: 'none', width: '100px' }} disableRipple>ADD</Button>
+          </Box>
+
         </form>
       </Box>
     </>

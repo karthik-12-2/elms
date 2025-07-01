@@ -17,7 +17,8 @@ const addemployee = async (req, res) => {
                   city,
                   address,
                   mobilenumber,
-                  password
+                  password,
+                  salary
             } = await parseJSONBody(req);
 
             const newEmployee = await createEmployee(employeecode,
@@ -31,7 +32,8 @@ const addemployee = async (req, res) => {
                   city,
                   address,
                   mobilenumber,
-                  'active'
+                  'active',
+                  salary
             )
 
             if (!newEmployee) {
